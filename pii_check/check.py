@@ -30,7 +30,7 @@ def check(text, policy):
     found = len(emails) + len(phones)
 
     if policy == "block" and found:
-        return {"types": types, "decision": "blocked", "redaction_count": found, "text": None}
+        return {"types": types, "decision": "blocked", "redaction_count": 0, "text": None}
     if found:
         return {"types": types, "decision": "redacted", "redaction_count": found, "text": redacted}
     return {"types": [], "decision": "allowed", "redaction_count": 0, "text": text}
