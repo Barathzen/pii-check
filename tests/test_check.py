@@ -32,3 +32,11 @@ def test_clean_text_is_allowed():
 def test_unknown_policy_raises():
     with pytest.raises(ValueError):
         check("x", "shred")
+
+
+def test_block_redacts_nothing_but_lists_types():
+    r = check("Mail bob@example.com or call 415-555-0134", "block")
+    assert r["decision"] == "blocked"
+    assert r["text"] is None
+    assert r["types"] == ["email", "phone"]
+    assert r["redaction_count"] == 0
